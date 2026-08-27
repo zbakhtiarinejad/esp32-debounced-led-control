@@ -1,6 +1,6 @@
-# esp32-debounced-led-control
+# ESP32 Debounced LED Controller
 
-An embedded C++ simulation built in Wokwi demonstrating digital output control, internal pull-up inputs, and software debouncing on an ESP32 microcontroller.
+An embedded C++ project built in Wokwi demonstrating digital output control, internal pull-up inputs, and software debouncing on an ESP32 microcontroller.
 
 ## Hardware & Pinout
 
@@ -12,19 +12,20 @@ An embedded C++ simulation built in Wokwi demonstrating digital output control, 
 
 ## Technical Features
 
-* **Non-Blocking Debouncing:** Employs a 50 ms time threshold with `millis()` to eliminate mechanical switch contact chatter without interrupting execution.
-* **Minimal Hardware Footprint:** Configures GPIO 4 with `INPUT_PULLUP` to remove the need for external pull-up resistors.
+* **Non-Blocking Debouncing:** Uses `millis()` state tracking to eliminate mechanical button chatter without blocking execution using `delay()`.
+* **Internal Pull-Up Configuration:** Configures GPIO 2 with `INPUT_PULLUP` to remove external pull-up resistor requirements.
 
 ## Engineering Challenges & Fixes
 
 | Issue | Root Cause | Solution |
 | :--- | :--- | :--- |
-| **No output on GPIO 35** | Pins 34–39 on the ESP32 are input-only (GPI) and lack output drivers. | Remapped the output driver to **GPIO 22**. |
-| **Pin Mismatch Errors** | `setup()` initialized pins 2 and 4, while `loop()` targeted pins 23 and 35. | Consolidated all pin numbers into global `const int` constants. |
-| **Button Signal Chatter** | Physical switch bounce registered rapid false toggle events. | Implemented non-blocking timing logic to validate state stability. |
+| **Inverted / Duplicate Pin Definitions** | `LED1` and `BUTTON` variables shared GPIO 4, overriding output setup with `INPUT_PULLUP`. | Swapped and isolated variable assignments (`BUTTON` = 2, `LED1` = 4) to match actual circuit wiring. |
+| **No Output on GPIO 35** | Pins 34–39 on the ESP32 are input-only (GPI) and cannot drive outputs. | Remapped output driver to a general-purpose GPIO. |
+| **Button Switch Chatter** | Physical contact bouncing caused multiple false state change triggers. | Added software debouncing with a **50 ms** stabilization threshold. |
+| **Compilation Syntax Error** | Missing semicolon after `digitalRead()` call blocked code build. | Corrected code syntax and enforced strict constant definitions. |
 
 ## How to Run
 
 1. Open the project link on [Wokwi Simulation](https://wokwi.com).
 2. Click **Start Simulation** (Play button).
-3. Press and hold the pushbutton to illuminate both LEDs.
+3. Press the pushbutton to actuate both LEDs.
