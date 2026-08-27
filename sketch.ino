@@ -1,7 +1,7 @@
 // Define pin numbers for your ESP32 setup
 const int LED1 = 4;
 const int LED2 = 23;
-const int BUTTON = 4;
+const int BUTTON = 2;
 
 void setup() {
   pinMode(LED1, OUTPUT);
