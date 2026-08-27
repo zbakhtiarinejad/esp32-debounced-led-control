@@ -6,7 +6,7 @@ An embedded C++ simulation built in Wokwi demonstrating digital output control, 
 
 | Component | ESP32 Pin | Configuration |
 | :--- | :--- | :--- |
-| **LED 1** | GPIO 22 | Series 220 Ω resistor to GND |
+| **LED 1** | GPIO 4 | Series 220 Ω resistor to GND |
 | **LED 2** | GPIO 23 | Series 220 Ω resistor to GND |
 | **Pushbutton** | GPIO 4 | Wired to GND (Uses internal `INPUT_PULLUP`) |
 
