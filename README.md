@@ -8,7 +8,7 @@ An embedded C++ simulation built in Wokwi demonstrating digital output control, 
 | :--- | :--- | :--- |
 | **LED 1** | GPIO 4 | Series 220 Ω resistor to GND |
 | **LED 2** | GPIO 23 | Series 220 Ω resistor to GND |
-| **Pushbutton** | GPIO 4 | Wired to GND (Uses internal `INPUT_PULLUP`) |
+| **Pushbutton** | GPIO 2 | Wired to GND (Uses internal `INPUT_PULLUP`) |
 
 ## Technical Features
 
